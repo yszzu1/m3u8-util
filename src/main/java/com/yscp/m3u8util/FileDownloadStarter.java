@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 @Component
 public class FileDownloadStarter {
 
-    private static ExecutorService es =  Executors.newFixedThreadPool(40);
+    public static ExecutorService es =  Executors.newFixedThreadPool(40);
 
     public static void doBegins(String url) throws IOException, InterruptedException {
         if(!(url.startsWith("http://") || url.startsWith("https://")) || !url.endsWith(".m3u8")) {
@@ -40,12 +40,6 @@ public class FileDownloadStarter {
         System.out.println("分片下载完成，开始合并文件");
         FileUtil.mergeFiles("D:/xxx.ts", "D:/tmp/");
         System.out.println("合并完成, 请查看D:/xxx.ts并重命名");
-    }
-
-    public static void main(String[] args) throws IOException, InterruptedException {
-        FileDownloadStarter.doBegins(args[0]);
-        es.shutdown();
-        System.exit(0);
     }
 
 }
